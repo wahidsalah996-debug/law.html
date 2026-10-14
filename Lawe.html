@@ -1,0 +1,323 @@
+!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>قضاياي | إدارة القضايا بسرية</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1B1F2A;--gold:#B8924A;--gd:#8C6B2C;--paper:#F7F4EE;--card:#fff;--line:#DDD6C8;--mut:#5E5A52;--ok:#2E7D5B;--red:#B3402F;--btn:#1B1F2A;--btnt:#fff;--cw:#FFF3D6;--cd:#FDE8E5;--co:#E6F0E9;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--ink:#EDE8DC;--gold:#C9A25A;--gd:#D9B877;--paper:#14171F;--card:#1E222D;--line:#363B4A;--mut:#A7A398;--ok:#4DB88A;--red:#E5705F;--btn:#EDE8DC;--btnt:#14171F;--cw:#3A3220;--cd:#40231F;--co:#1D3328;color-scheme:dark}}
+:root[data-theme=dark]{--ink:#EDE8DC;--gold:#C9A25A;--gd:#D9B877;--paper:#14171F;--card:#1E222D;--line:#363B4A;--mut:#A7A398;--ok:#4DB88A;--red:#E5705F;--btn:#EDE8DC;--btnt:#14171F;--cw:#3A3220;--cd:#40231F;--co:#1D3328;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;font-family:Cairo,Tahoma,Arial,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6}
+h1,h2,.brand{font-family:Amiri,Georgia,serif}
+.bar{background:#1B1F2A;color:#fff;border-bottom:2px solid var(--gold);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.bar>div{max-width:760px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.brand{font-size:22px;flex:1}
+.badge{font-size:12px;background:#2B3142;color:#E8D9B5;padding:3px 10px;border-radius:20px;border:1px solid #B8924A}
+.ibtn{background:none;border:1px solid #4A4F5E;color:#fff;border-radius:6px;padding:6px 10px;font:600 13px Cairo,sans-serif;cursor:pointer}
+main{max-width:760px;margin:0 auto;padding:16px}
+.btn{display:inline-block;padding:11px 20px;border-radius:6px;border:0;background:var(--btn);color:var(--btnt);font:700 15px Cairo,sans-serif;cursor:pointer}
+.btn:hover{opacity:.9}.btn:disabled{opacity:.5}
+.btn.gold{background:var(--gold);color:#1B1305}
+.btn.ghost{background:none;color:var(--ink);border:1.5px solid var(--line)}
+.btn.red{background:none;color:var(--red);border:1.5px solid var(--red)}
+.btn.small{padding:7px 14px;font-size:13px}
+input,select,textarea{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:6px;font:14px Cairo,sans-serif;background:var(--card);color:var(--ink)}
+textarea{min-height:90px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible,summary:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+label{display:block;font-size:13px;font-weight:600;margin:10px 0 3px;color:var(--mut)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0}
+.panel h2{margin:0 0 10px;font-size:22px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.stats div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13px;color:var(--mut);text-align:center}
+.stats b{display:block;font:700 28px Amiri,serif;color:var(--gd)}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.toolbar input{flex:1;min-width:180px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:10px 0;cursor:pointer;border-inline-start:5px solid var(--gold)}
+.card.u{border-inline-start-color:var(--red)}.card.f{border-inline-start-color:var(--ok)}
+.card:hover{border-color:var(--gold)}
+.card h3{margin:0;font-size:17px}
+.meta{font-size:13px;color:var(--mut);display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;align-items:center}
+.chip{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:2px 10px;font-size:12px}
+.chip.ok{background:var(--co);color:var(--ok)}.chip.warn{background:var(--cw);color:var(--gd)}.chip.danger{background:var(--cd);color:var(--red)}
+.late{color:var(--red);font-weight:700}.soon{color:var(--gd);font-weight:700}
+.bar2{height:6px;background:var(--line);border-radius:3px;margin-top:8px;overflow:hidden}
+.bar2 i{display:block;height:100%;background:var(--ok)}
+.row{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row input[type=checkbox]{width:20px;height:20px;flex:none;accent-color:var(--ok)}
+.row span{flex:1;overflow-wrap:anywhere}.done{text-decoration:line-through;color:var(--mut)}
+.x{background:none;border:0;color:var(--red);font-size:22px;cursor:pointer;padding:0 8px}
+.add{display:flex;gap:8px;margin-top:10px}
+.grid2{display:grid;gap:0 12px}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.empty,.note{color:var(--mut);font-size:14px;background:var(--paper);padding:12px;border-radius:8px;text-align:center;border:1px dashed var(--line)}
+.lockbox{max-width:380px;margin:50px auto;text-align:center;background:var(--card);padding:24px;border-radius:12px;border:1px solid var(--line)}
+.lockbox input{margin-top:8px;text-align:center}
+.err{color:var(--red);min-height:22px;font-size:14px;margin-top:6px}
+details.menu{position:relative}
+details.menu summary{list-style:none;cursor:pointer}
+.pop{position:absolute;inset-inline-end:0;top:38px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;width:250px;padding:6px;z-index:9;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+.pop button{display:block;width:100%;text-align:start;background:none;border:0;padding:10px;font:600 14px Cairo,sans-serif;color:inherit;cursor:pointer;border-radius:6px}
+.pop button:hover{background:var(--paper)}
+#toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:#1B1F2A;color:#fff;padding:12px 16px;border-radius:8px;text-align:center;display:none;z-index:99}
+dialog{border:0;padding:0;border-radius:12px;max-width:600px;width:calc(100% - 32px);background:var(--card);color:var(--ink)}
+dialog::backdrop{background:rgba(10,12,18,.6)}
+.dialog-head{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.dialog-head h2{margin:0;font-size:20px}
+.dialog-body{padding:16px;max-height:70vh;overflow:auto}
+footer{max-width:760px;margin:10px auto 30px;padding:0 16px;font-size:12px;color:var(--mut);text-align:center}
+.privacy{font-size:12px;background:#2B3142;color:#E8D9B5;padding:8px 12px;border-radius:6px}
+@media(min-width:640px){.grid2{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(4,1fr)}}
+@media print{.bar,.acts,.add,.x,#toast,.nopr,.privacy{display:none!important}body{background:#fff;color:#000}.panel{border-color:#999}}
+</style>
+</head>
+<body>
+<header class="bar" id="topbar" style="display:none"><div>
+  <div class="brand">⚖️ قضاياي</div>
+  <span class="badge">🔒 AES-256</span>
+  <button class="ibtn" onclick="lock()">قفل</button>
+  <details class="menu"><summary class="ibtn">☰ القائمة</summary>
+    <div class="pop">
+      <button onclick="openBackup()">💾 نسخ احتياطي / استعادة</button>
+      <button onclick="changePass()">🔑 تغيير الرمز السري</button>
+      <button onclick="wipe()" style="color:var(--red)">🗑️ حذف كل البيانات</button>
+    </div></details>
+</div></header>
+<main id="app"></main>
+<div id="toast" role="status"></div>
+
+<dialog id="caseDialog">
+  <div class="dialog-head"><h2 id="dialogTitle">قضية جديدة</h2><button type="button" class="x" aria-label="إغلاق" onclick="$('caseDialog').close()">×</button></div>
+  <form class="dialog-body" onsubmit="saveCase(event)">
+    <input type="hidden" id="caseId">
+    <label for="f_title">عنوان القضية *</label><input id="f_title" required maxlength="150" placeholder="مثال: نزاع عقاري - العميل أحمد">
+    <div class="grid2">
+      <div><label for="f_number">رقم القضية</label><input id="f_number" placeholder="2024/123"></div>
+      <div><label for="f_court">المحكمة / الجهة</label><input id="f_court" placeholder="المحكمة الابتدائية"></div>
+      <div><label for="f_client">الموكل</label><input id="f_client"></div>
+      <div><label for="f_opponent">الخصم</label><input id="f_opponent"></div>
+      <div><label for="f_type">نوع القضية</label><select id="f_type"><option>مدني</option><option>جنائي</option><option>تجاري</option><option>أسرة</option><option>إداري</option><option>عقاري</option><option>أخرى</option></select></div>
+      <div><label for="f_status">الحالة</label><select id="f_status"><option>قيد النظر</option><option>مؤجلة</option><option>محجوزة للحكم</option><option>منتهية - ربح</option><option>منتهية - خسارة</option><option>محفوظة</option></select></div>
+      <div><label for="f_priority">الأولوية</label><select id="f_priority"><option>عادية</option><option>مهمة</option><option>عاجلة</option></select></div>
+      <div><label for="f_date">الجلسة القادمة</label><input id="f_date" type="date"></div>
+    </div>
+    <label for="f_desc">ملاحظات سرية (مشفّرة)</label><textarea id="f_desc"></textarea>
+    <div class="acts" style="justify-content:flex-end;margin-top:16px">
+      <button type="button" class="btn ghost" onclick="$('caseDialog').close()">إلغاء</button>
+      <button type="submit" class="btn gold">حفظ القضية</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="bkDialog">
+  <div class="dialog-head"><h2>النسخ الاحتياطي المشفّر</h2><button type="button" class="x" aria-label="إغلاق" onclick="$('bkDialog').close()">×</button></div>
+  <div class="dialog-body">
+    <p class="note">النسخة مشفّرة برمزك الحالي. عند الاستعادة تُفتح بالرمز الذي أُنشئت به.</p>
+    <textarea id="bk" dir="ltr" style="font:12px monospace;min-height:120px" aria-label="النسخة المشفرة"></textarea>
+    <input type="file" id="bkFile" hidden accept=".json,.txt" onchange="bkLoad(this)">
+    <div class="acts">
+      <button class="btn small" onclick="bkCopy()">نسخ</button>
+      <button class="btn small" onclick="bkDl()">تنزيل ملف</button>
+      <button class="btn ghost small" onclick="$('bkFile').click()">اختيار ملف…</button>
+      <button class="btn red small" onclick="bkImport()">استيراد (يستبدل الحالي)</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="cf"><div class="dialog-body">
+  <p id="cfm" style="font-weight:600;margin-top:0"></p>
+  <div id="cfp" hidden><input id="p1" type="password" placeholder="الرمز الجديد (6 أحرف على الأقل)"><input id="p2" type="password" placeholder="أعد كتابته" style="margin-top:8px"></div>
+  <div class="acts" style="justify-content:flex-end"><button class="btn ghost small" id="cfn">إلغاء</button><button class="btn red small" id="cfy">تأكيد</button></div>
+</div></dialog>
+
+<script>
+const $=id=>document.getElementById(id),VK='qv4',OLD=['qadayai_v3_encrypted','qadayai_pin_hash'];
+const TE=new TextEncoder(),TD=new TextDecoder();
+let cases=[],KEY=null,SALT=null,activeId=null,fs='الكل',q='',idle;
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const b64=u=>{let s='';u.forEach(x=>s+=String.fromCharCode(x));return btoa(s)},ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const toast=m=>{const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(t._t);t._t=setTimeout(()=>t.style.display='none',3000)};
+const getV=()=>{try{const v=JSON.parse(localStorage.getItem(VK));return v&&typeof v.salt==='string'&&typeof v.data==='string'?v:null}catch{return null}};
+
+// ===== التشفير الحقيقي: PBKDF2 + AES-GCM =====
+async function derive(p,salt){const k=await crypto.subtle.importKey('raw',TE.encode(p),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:250000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function seal(){const iv=crypto.getRandomValues(new Uint8Array(12));const ct=await crypto.subtle.encrypt({name:'AES-GCM',iv},KEY,TE.encode(JSON.stringify(cases)));return b64(iv)+'.'+b64(new Uint8Array(ct))}
+async function openData(s,key){const[i,c]=s.split('.');return JSON.parse(TD.decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:ub(i)},key,ub(c))))}
+async function save(){try{localStorage.setItem(VK,JSON.stringify({v:4,salt:b64(SALT),data:await seal()}))}catch{toast('⚠️ تعذّر الحفظ: التخزين معطّل أو ممتلئ')}}
+
+// ===== تنظيف البيانات =====
+const S=v=>typeof v==='string'?v:'';
+function norm(c){if(!c||typeof c!=='object')return null;const id=/^[\w-]{1,40}$/.test(c.id)?c.id:'c_'+Math.random().toString(36).slice(2,10);
+return{id,title:S(c.title)||'بدون عنوان',number:S(c.number),court:S(c.court),client:S(c.client),opponent:S(c.opponent),type:S(c.type)||'أخرى',status:S(c.status)||'قيد النظر',priority:S(c.priority)||'عادية',date:/^\d{4}-\d\d-\d\d$/.test(c.date)?c.date:'',desc:S(c.desc),createdAt:/^\d{4}-\d\d-\d\d$/.test(c.createdAt)?c.createdAt:'',
+tasks:(Array.isArray(c.tasks)?c.tasks:[]).map(t=>({text:S(t&&t.text),done:!!(t&&t.done)})),docs:(Array.isArray(c.docs)?c.docs:[]).map(d=>({name:S(d&&d.name),cat:S(d&&d.cat),date:S(d&&d.date)}))}}
+
+// ===== التواريخ (محلية، بدون انزياح UTC) =====
+const pd=d=>new Date(d+'T00:00:00'),t0=()=>{const n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate())};
+const dd=c=>Math.round((pd(c.date)-t0())/864e5),fin=c=>/^(منتهية|محفوظة)/.test(c.status);
+const late=c=>c.date&&!fin(c)&&dd(c)<0,soon=c=>c.date&&!fin(c)&&dd(c)>=0&&dd(c)<=7;
+const fmt=d=>pd(d).toLocaleDateString('ar-EG',{day:'numeric',month:'long',year:'numeric'});
+const urgent=c=>!fin(c)&&(c.priority==='عاجلة'||soon(c)||late(c));
+
+// ===== القفل =====
+function lock(){KEY=null;SALT=null;cases=[];activeId=null;q='';clearTimeout(idle);document.querySelectorAll('dialog[open]').forEach(d=>d.close());render()}
+function resetIdle(){clearTimeout(idle);if(KEY)idle=setTimeout(lock,3*60*1000)}
+['click','keydown','pointermove','touchstart','scroll'].forEach(e=>document.addEventListener(e,resetIdle,{passive:true}));
+document.addEventListener('click',e=>{const m=document.querySelector('details.menu');if(m&&(!m.contains(e.target)||e.target.closest('.pop button')))m.open=false});
+async function tryUnlock(){
+  const v=getV(),p=$('pin').value,b=$('ub');b.disabled=true;b.textContent='جارٍ التحقق…';
+  const fail=m=>{$('pinErr').textContent=m;b.disabled=false;b.textContent=v?'فتح':'إنشاء وقفل'};
+  try{
+    if(!v){
+      if(p.length<6)return fail('الرمز يجب أن يكون 6 أحرف على الأقل');
+      if(p!==$('pin2').value)return fail('الرمزان غير متطابقين');
+      let old=[];try{old=JSON.parse(localStorage.getItem(OLD[0])||'[]')}catch{}
+      SALT=crypto.getRandomValues(new Uint8Array(16));KEY=await derive(p,SALT);
+      cases=(Array.isArray(old)?old:[]).map(norm).filter(Boolean);await save();
+      if(old.length){OLD.forEach(k=>localStorage.removeItem(k));toast('تم نقل قضاياك القديمة إلى التخزين المشفّر')}
+    }else{
+      let k,d;try{const s=ub(v.salt);k=await derive(p,s);d=await openData(v.data,k);SALT=s}catch{return fail('رمز خاطئ')}
+      KEY=k;cases=(Array.isArray(d)?d:[]).map(norm).filter(Boolean);
+    }
+  }catch{return fail('هذا المتصفح لا يدعم التشفير. استخدم متصفحاً حديثاً وفي اتصال آمن (HTTPS).')}
+  resetIdle();render();
+}
+
+// ===== حوار التأكيد (بدون confirm/prompt) =====
+function ask(msg,pw){return new Promise(r=>{$('cfm').textContent=msg;$('cfp').hidden=!pw;$('p1').value=$('p2').value='';const d=$('cf');
+const end=v=>{d.onclose=null;d.close();r(v)};$('cfy').onclick=()=>end(pw?[$('p1').value,$('p2').value]:true);$('cfn').onclick=()=>end(null);d.onclose=()=>r(null);d.showModal()})}
+
+// ===== العرض =====
+function render(top){
+  const y=top?0:scrollY,app=$('app');
+  if(!KEY){
+    const v=getV();$('topbar').style.display='none';
+    app.innerHTML=`<div class="lockbox" onkeydown="if(event.key==='Enter')tryUnlock()">
+    <h1 style="margin:0">🔐 ${v?'أدخل الرمز السري':'أنشئ رمزاً سرياً'}</h1>
+    <p class="note" style="margin:12px 0">بياناتك مشفّرة بـ AES-256 ومحفوظة على هذا الجهاز فقط.${v?'':'<br><b>لا يمكن استرجاع الرمز إن نسيته.</b>'}</p>
+    <input id="pin" type="password" autocomplete="off" placeholder="الرمز السري" aria-label="الرمز السري">
+    ${v?'':'<input id="pin2" type="password" autocomplete="off" placeholder="أعد كتابة الرمز" aria-label="تأكيد الرمز">'}
+    <div class="err" id="pinErr" role="alert"></div>
+    <button class="btn gold" id="ub" style="width:100%" onclick="tryUnlock()">${v?'فتح':'إنشاء وقفل'}</button>
+    ${v?'<p style="font-size:12px;color:var(--mut)">نسيت الرمز؟ لا توجد طريقة لاستعادة البيانات.</p><button class="btn red small" onclick="wipe()">حذف البيانات والبدء من جديد</button>':''}
+    </div>`;
+    setTimeout(()=>$('pin')&&$('pin').focus(),50);return;
+  }
+  $('topbar').style.display='block';
+  activeId&&cases.some(c=>c.id===activeId)?renderDetail(app):(activeId=null,renderDashboard(app));
+  scrollTo(0,y);
+}
+const matches=c=>{
+  if(fs==='نشطة'&&fin(c))return false;
+  if(fs==='عاجلة'&&!urgent(c))return false;
+  if(['قيد النظر','مؤجلة','محجوزة للحكم'].includes(fs)&&c.status!==fs)return false;
+  if(fs==='منتهية'&&!c.status.startsWith('منتهية'))return false;
+  if(fs==='محفوظة'&&c.status!=='محفوظة')return false;
+  return !q||[c.title,c.number,c.court,c.client,c.opponent,c.type].join(' ').toLowerCase().includes(q.toLowerCase());
+};
+function renderDashboard(app){
+  const act=cases.filter(c=>!fin(c)),td=cases.reduce((s,c)=>s+c.tasks.filter(t=>t.done).length,0),tt=cases.reduce((s,c)=>s+c.tasks.length,0);
+  const next=act.filter(c=>c.date&&dd(c)>=0).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,3);
+  app.innerHTML=`<div class="privacy">🔒 التخزين مشفّر ومحلي • القفل التلقائي بعد 3 دقائق خمول</div>
+  <div class="stats" style="margin-top:12px"><div><b>${cases.length}</b>إجمالي القضايا</div><div><b>${act.length}</b>قضايا نشطة</div><div><b>${cases.filter(urgent).length}</b>عاجلة / قريبة</div><div><b>${td}/${tt}</b>مهام منجزة</div></div>
+  <div class="panel"><h2>لوحة التحكم <button class="btn gold small" onclick="openDialog()">+ قضية جديدة</button></h2>
+  <div class="toolbar"><input id="search" type="search" aria-label="بحث" placeholder="🔍 بحث بالعنوان، الرقم، الموكل، الخصم..." value="${esc(q)}" oninput="q=this.value;renderCards()">
+  <select id="filter" aria-label="تصفية" onchange="fs=this.value;renderCards()" style="max-width:170px">${['الكل','نشطة','عاجلة','قيد النظر','مؤجلة','محجوزة للحكم','منتهية','محفوظة'].map(o=>`<option${o===fs?' selected':''}>${o}</option>`).join('')}</select></div>
+  ${next.length?`<div class="note" style="text-align:start">📅 <b>أقرب الجلسات:</b> ${next.map(h=>`${esc(h.title)} - ${fmt(h.date)}`).join(' • ')}</div>`:''}</div>
+  <div id="cards"></div>
+  <div class="panel nopr" style="font-size:13px;color:var(--mut)"><b>تنبيه:</b> لا تكتب في الملاحظات بيانات لا تحتاجها. خذ نسخة احتياطية مشفّرة من القائمة وخزّنها بعيداً عن الجهاز. إن نسيت الرمز فلا يمكن استرجاع البيانات.</div>`;
+  renderCards();
+}
+function renderCards(){
+  const box=$('cards');if(!box)return;
+  const list=cases.filter(matches).sort((a,b)=>{
+    const fa=fin(a),fb=fin(b);if(fa!==fb)return fa?1:-1;
+    if(a.date&&b.date)return a.date.localeCompare(b.date);if(a.date)return -1;if(b.date)return 1;
+    return (b.priority==='عاجلة')-(a.priority==='عاجلة')});
+  if(!list.length){box.innerHTML=`<div class="empty">${cases.length?'لا توجد قضايا مطابقة.':'لا توجد قضايا بعد. أضف أول قضية.'}<br><button class="btn gold small" style="margin-top:8px" onclick="openDialog()">+ قضية جديدة</button></div>`;return}
+  box.innerHTML=list.map(c=>{
+    const dn=c.tasks.filter(t=>t.done).length,n=c.tasks.length,pct=n?Math.round(dn/n*100):0,dc=late(c)?'late':soon(c)?'soon':'';
+    return `<div class="card ${fin(c)?'f':urgent(c)?'u':''}" tabindex="0" role="button" onclick="openCase('${c.id}')" onkeydown="if(event.key==='Enter')openCase('${c.id}')">
+    <h3>${esc(c.title)} ${c.priority==='عاجلة'?'<span class="chip danger">عاجلة</span>':''}</h3>
+    <div class="meta"><span class="chip">${esc(c.type)}</span><span class="chip ${c.status.startsWith('منتهية')?'ok':c.status==='مؤجلة'?'warn':''}">${esc(c.status)}</span>
+    ${c.number?`<span>📁 ${esc(c.number)}</span>`:''}${c.court?`<span>🏛️ ${esc(c.court)}</span>`:''}
+    ${c.date?`<span class="${dc}">📅 ${fmt(c.date)}${late(c)?' • متأخرة':soon(c)?' • قريبة':''}</span>`:''}</div>
+    ${c.client?`<div class="meta"><span>👤 موكل: ${esc(c.client)}</span>${c.opponent?` • خصم: ${esc(c.opponent)}`:''}</div>`:''}
+    ${n?`<div class="bar2"><i style="width:${pct}%"></i></div><div style="font-size:12px;color:var(--mut);margin-top:4px">${dn}/${n} مهام • ${pct}%</div>`:''}</div>`}).join('');
+}
+function renderDetail(app){
+  const c=cases.find(x=>x.id===activeId),dn=c.tasks.filter(t=>t.done).length,n=c.tasks.length,pct=n?Math.round(dn/n*100):0;
+  app.innerHTML=`<button class="btn ghost small nopr" onclick="activeId=null;render(true)">← العودة للقائمة</button>
+  <div class="panel"><h2>${esc(c.title)} <span style="font:600 13px Cairo,sans-serif;color:var(--mut)">${esc(c.number||'بدون رقم')}</span></h2>
+  <div class="meta" style="margin:0 0 10px"><span class="chip">${esc(c.type)}</span><span class="chip">${esc(c.status)}</span><span class="chip ${c.priority==='عاجلة'?'danger':c.priority==='مهمة'?'warn':''}">${esc(c.priority)}</span>
+  ${c.date?`<span class="${late(c)?'late':soon(c)?'soon':''}">📅 الجلسة: ${fmt(c.date)}</span>`:''}</div>
+  <div class="grid2" style="font-size:14px"><div>🏛️ <b>المحكمة:</b> ${esc(c.court||'-')}</div><div>👤 <b>الموكل:</b> ${esc(c.client||'-')}</div><div>⚔️ <b>الخصم:</b> ${esc(c.opponent||'-')}</div><div>🗓️ <b>تاريخ الفتح:</b> ${c.createdAt?fmt(c.createdAt):'-'}</div></div>
+  ${c.desc?`<div style="margin-top:12px;background:var(--paper);padding:12px;border-radius:8px;border:1px solid var(--line);white-space:pre-wrap;overflow-wrap:anywhere"><b>ملاحظات سرية:</b><br>${esc(c.desc)}</div>`:''}
+  ${n?`<div class="bar2" style="margin-top:12px"><i style="width:${pct}%"></i></div><div style="font-size:13px;color:var(--mut)">${dn}/${n} مهام مكتملة</div>`:''}
+  <div class="acts"><button class="btn gold small" onclick="openDialog('${c.id}')">✏️ تعديل</button><button class="btn ghost small" onclick="print()">🖨️ طباعة / PDF</button><button class="btn red small" onclick="delCase()">حذف القضية</button></div></div>
+  <div class="panel"><h2>✅ الإجراءات والمهام <span style="font:600 13px Cairo,sans-serif;color:var(--mut)">${dn}/${n}</span></h2>
+  <div>${c.tasks.map((t,i)=>`<div class="row"><input type="checkbox" aria-label="إنجاز" ${t.done?'checked':''} onchange="mut(()=>cur().tasks[${i}].done=this.checked)"><span class="${t.done?'done':''}">${esc(t.text)}</span><button class="x" aria-label="حذف" onclick="mut(()=>cur().tasks.splice(${i},1))">×</button></div>`).join('')||'<div class="empty">لا توجد مهام بعد. أضف أول إجراء.</div>'}</div>
+  <div class="add"><input id="newTask" aria-label="مهمة جديدة" placeholder="مثال: تقديم مذكرة دفاع" onkeydown="if(event.key==='Enter')addTask()"><button class="btn small" onclick="addTask()">إضافة</button></div></div>
+  <div class="panel"><h2>📎 الوثائق</h2><p class="note" style="text-align:start">تُسجَّل أسماء الوثائق فقط؛ لا يُرفع أي ملف. احتفظ بالأصول في مجلد مشفّر على جهازك.</p>
+  <div>${c.docs.map((d,i)=>`<div class="row"><span>📄 ${esc(d.name)} <small style="color:var(--mut)">• ${esc(d.cat)} • ${esc(d.date)}</small></span><button class="x" aria-label="حذف" onclick="mut(()=>cur().docs.splice(${i},1))">×</button></div>`).join('')||'<div class="empty">لا توجد وثائق مسجلة</div>'}</div>
+  <div class="grid2" style="margin-top:10px"><input id="docName" aria-label="اسم الوثيقة" placeholder="اسم الوثيقة" onkeydown="if(event.key==='Enter')addDoc()"><select id="docCat" aria-label="النوع"><option>عقد</option><option>حكم</option><option>مذكرة</option><option>توكيل</option><option>مراسلة</option><option>أخرى</option></select></div>
+  <button class="btn small" style="margin-top:8px;width:100%" onclick="addDoc()">+ تسجيل وثيقة</button></div>`;
+}
+
+// ===== عمليات =====
+const cur=()=>cases.find(x=>x.id===activeId);
+async function mut(fn){fn();await save();render()}
+function openCase(id){activeId=id;render(true)}
+function openDialog(id){
+  const c=id?cases.find(x=>x.id===id):null;
+  $('dialogTitle').textContent=c?'تعديل القضية':'قضية جديدة';$('caseId').value=c?c.id:'';
+  ['title','number','court','client','opponent','desc'].forEach(k=>$('f_'+k).value=c?c[k]:'');
+  $('f_type').value=c?c.type:'مدني';$('f_status').value=c?c.status:'قيد النظر';$('f_priority').value=c?c.priority:'عادية';$('f_date').value=c?c.date:'';
+  $('caseDialog').showModal();
+}
+async function saveCase(e){
+  e.preventDefault();
+  const id=$('caseId').value||'c_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),old=cases.find(c=>c.id===id);
+  const o={id,title:f_title.value.trim(),number:f_number.value.trim(),court:f_court.value.trim(),client:f_client.value.trim(),opponent:f_opponent.value.trim(),type:f_type.value,status:f_status.value,priority:f_priority.value,date:f_date.value,desc:f_desc.value.trim(),
+  createdAt:old?old.createdAt:new Date().toLocaleDateString('sv-SE'),tasks:old?old.tasks:[],docs:old?old.docs:[]};
+  if(!o.title)return;
+  old?cases[cases.indexOf(old)]=o:cases.push(o);
+  await save();$('caseDialog').close();toast('✅ تم حفظ القضية');
+  if(!old)activeId=id; // فتح التفاصيل للقضية الجديدة فقط
+  render(!old);
+}
+async function delCase(){
+  if(!await ask('حذف القضية وكل مهامها ووثائقها نهائياً؟ لا يمكن التراجع.'))return;
+  cases=cases.filter(c=>c.id!==activeId);activeId=null;await save();toast('🗑️ تم الحذف');render(true);
+}
+function addTask(){const t=$('newTask').value.trim();if(t)mut(()=>cur().tasks.push({text:t,done:false}))}
+function addDoc(){const n=$('docName').value.trim();if(!n)return toast('أدخل اسم الوثيقة');const k=$('docCat').value;mut(()=>cur().docs.push({name:n,cat:k,date:new Date().toLocaleDateString('ar-EG')}))}
+
+// ===== النسخ الاحتياطي وإدارة الرمز =====
+function openBackup(){$('bk').value=localStorage.getItem(VK)||'';$('bkDialog').showModal()}
+function bkCopy(){const t=$('bk');t.select();(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).then(()=>toast('تم النسخ'),()=>{try{document.execCommand('copy');toast('تم النسخ')}catch{toast('انسخ النص يدوياً')}})}
+function bkDl(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([$('bk').value],{type:'application/json'}));a.download='qadayai-backup-'+new Date().toLocaleDateString('sv-SE')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function bkLoad(i){const f=i.files[0];if(f)f.text().then(t=>$('bk').value=t);i.value=''}
+async function bkImport(){
+  let v;try{v=JSON.parse($('bk').value)}catch{}
+  if(!v||v.v!==4||typeof v.salt!=='string'||typeof v.data!=='string')return toast('النسخة غير صالحة');
+  if(!await ask('سيتم استبدال كل البيانات الحالية بالنسخة المستوردة. متابعة؟'))return;
+  localStorage.setItem(VK,JSON.stringify({v:4,salt:v.salt,data:v.data}));$('bkDialog').close();lock();toast('تم الاستيراد — افتح برمز النسخة');
+}
+async function changePass(){
+  const r=await ask('تغيير الرمز السري',true);if(!r)return;
+  if(r[0].length<6)return toast('الرمز قصير (6 أحرف على الأقل)');if(r[0]!==r[1])return toast('الرمزان غير متطابقين');
+  SALT=crypto.getRandomValues(new Uint8Array(16));KEY=await derive(r[0],SALT);await save();toast('✅ تم تغيير الرمز');
+}
+async function wipe(){
+  if(!await ask('سيتم حذف كل القضايا والرمز نهائياً من هذا الجهاز. متأكد؟'))return;
+  [VK,...OLD].forEach(k=>localStorage.removeItem(k));lock();toast('تم حذف كل البيانات');
+}
+render();
+</script>
+</body>
+</html>
+

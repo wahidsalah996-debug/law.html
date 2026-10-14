@@ -1,2 +1,0 @@
-# law.html
-index.html
