@@ -1,14 +1,21 @@
-# Qadayai — Arabic Legal Case Organizer Prototype
+# Qadayai — Arabic Legal Case Organizer
 
-This repository contains an experimental standalone HTML interface for organizing legal case information.
+Qadayai provides an Arabic-first, right-to-left interface for organizing case records, tasks, and document lists. It is designed to make legal workflows easier to review and navigate.
 
-## Preview
-- [Main portfolio](https://wahidsalah996-debug.github.io/portfolio/)
-- [Qadayai demo](https://wahidsalah996-debug.github.io/portfolio/qadayai.html)
+## Access
+
+- **Portfolio page:** https://wahidsalah996-debug.github.io/portfolio/qadayai.html
+- **Main portfolio:** https://wahidsalah996-debug.github.io/portfolio/
+- **Source:** [Lawe.html](https://github.com/wahidsalah996-debug/law.html/blob/main/Lawe.html)
 
 ## Run locally
-Open `Lawe.html` in a modern browser.
 
-## Important security note
-This is a prototype, not a verified secure legal case-management system. Do not enter real client names, case details, identity documents, passwords, or other confidential information. Review storage, authentication, encryption, backups, and access controls independently before any real use.
+Open `Lawe.html` in a modern browser. Some browser security features work only on HTTPS or localhost.
 
+## Implementation notes
+
+The standalone page stores data in the browser. Before any real legal practice uses it, the application needs a reviewed backend, authentication, access controls, secure storage, backups, and testing. Do not use real client information in the current standalone version.
+
+## Contact
+
+For development and customization inquiries: [wahidsalah996@gmail.com](mailto:wahidsalah996@gmail.com)
